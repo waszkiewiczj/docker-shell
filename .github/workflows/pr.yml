@@ -1,0 +1,27 @@
+name: Pull requests checks
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name:  Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Validate Dockerfile
+        uses: hadolint/hadolint-action@v1.6.0
+        with:
+          dockerfile: Dockerfile
+          format: tty
+        
+      - name: Build container
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          file: ./Dockerfile
+          push: false
