@@ -1,17 +1,6 @@
 # Docker Shell
 
-Run with:
-```bash
-docker run \
---priviledged \
---interactive \
---tty \
---rm \
---net host \
---pid host \
---user "$(id -u):$(id -g)" \
---volume "${HOME}:${HOME}" \
---volume "/etc/passwd:/etc/passwd:ro" \
---workdir "${HOME}" \
-<image-tag>
-```
+This is a project for running whole interactive shell inside docker.
+
+It contains all tools required for daily use and their configuration.
+This setup also makes it easier to move whole environment across different machines.
