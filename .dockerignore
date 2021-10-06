@@ -1,5 +1,8 @@
-.git
-.gitignore
+.git.*
 
 .dockerignore
 Dockerfile
+
+README.md
+CHANGELOG.md
+LICENSE
