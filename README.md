@@ -25,7 +25,7 @@ This solution requires only Docker engine running on host machine and Linux-base
 
 To run it, simply execute `docker-shell.sh` script:
 ```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/waszkiewiczj/docker-shell/master/docker-shell.sh)" 
+sh -c "$(curl -fsSL https://github.com/waszkiewiczj/docker-shell/releases/latest/download/docker-shell.sh)" 
 ```
 
 ## How it works?
@@ -34,7 +34,7 @@ When `docker-shell.sh` is executed, it runs `docker-shell` container in privileg
 
 In entrypoint script, `docker-shell` resolves host user name via mounted host user `$HOME` directory (it assumes that name of directory and username are the same), resolves host user `$UID` and `$GID` and uses it to generate host-like user with `sudo` and `docker` group membership.
 
-You should also notice very strage hostname displayed on prompt - it is current container ID. Thanks to that you can easily in which container you are working right now. 
+You should also notice very strage hostname displayed on prompt - it is current container ID. Thanks to that you can easily know in which container you are working right now. 
 
 ## Included tools
 
