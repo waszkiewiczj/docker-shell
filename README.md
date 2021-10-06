@@ -1,6 +1,7 @@
 # Docker Shell                          
 
-![workflow_status](https://github.com/waszkiewiczj/docker-shell/actions/workflows/main.yml/badge.svg)
+![release](https://github.com/waszkiewiczj/docker-shell/actions/workflows/release.yml/badge.svg)
+![release](https://github.com/waszkiewiczj/docker-shell/actions/workflows/master.yml/badge.svg)
 
 Fully-functional shell environment with multiple development tools run completely inside Docker container!
 

@@ -1,5 +1,4 @@
-name: Deploy dev version
-
+name: Master
 on:
   push:
     branches: [ master ]
