@@ -19,19 +19,25 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
+      - name: Get tag
+        uses: olegtarasov/get-tag@v2.1
+        id: getTag
+        with:
+          tagRegex: "v(.*)"
+
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/docker-shell:${{ github.ref }},${{ secrets.DOCKER_HUB_USERNAME }}/docker-shell:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/docker-shell:${{ steps.getTag.outputs.tag }},${{ secrets.DOCKER_HUB_USERNAME }}/docker-shell:latest
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v1
         with:
           body: |
-            Image available with tag ${{ secrets.DOCKER_HUB_USERNAME }}/docker-shell:${{ github.ref }}.
+            Image available with tag ${{ secrets.DOCKER_HUB_USERNAME }}/docker-shell:${{ steps.getTag.outputs.tag }}.
             See [CHANGELOG](${{ github.server_url }}/${{ github.repository }}/CHANGELOG.md) for more details.
           files: |
             docker-shell.sh
