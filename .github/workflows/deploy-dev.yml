@@ -1,11 +1,11 @@
-name: Deploy on Docker Hub
+name: Deploy dev version
 
 on:
   push:
     branches: [ master ]
 
 jobs:
-  update-dockerhub:
+  deploy-dev:
     runs-on: ubuntu-latest
     steps:
 
@@ -19,11 +19,9 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
           
       - name: Build and push
-        id: docker_build
         uses: docker/build-push-action@v2
         with:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/docker-shell:latest,${{ secrets.DOCKER_HUB_USERNAME }}/docker-shell:${{ github.sha }}
-          
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/docker-shell:dev-latest
