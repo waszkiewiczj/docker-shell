@@ -1,7 +1,9 @@
 # Docker Shell                          
 
 ![release](https://github.com/waszkiewiczj/docker-shell/actions/workflows/release.yml/badge.svg)
-![release](https://github.com/waszkiewiczj/docker-shell/actions/workflows/master.yml/badge.svg)
+![master](https://github.com/waszkiewiczj/docker-shell/actions/workflows/master.yml/badge.svg)
+[![GitHub release](https://img.shields.io/github/release/waszkiewiczj/docker-shell.svg)](https://GitHub.com/waszkiewiczj/docker-shell/releases)
+
 
 Fully-functional shell environment with multiple development tools run completely inside Docker container!
 

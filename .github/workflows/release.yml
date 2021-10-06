@@ -1,4 +1,4 @@
-name: Release
+name: release deploy
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - "v*"
 
 jobs:
-  release:
+  release-deploy:
     runs-on: ubuntu-latest
     steps:
 
@@ -37,7 +37,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           body: |
-            Image available with tag ${{ secrets.DOCKER_HUB_USERNAME }}/docker-shell:${{ steps.getTag.outputs.tag }}.
-            See [CHANGELOG](${{ github.server_url }}/${{ github.repository }}/CHANGELOG.md) for more details.
+            Image available with tag `${{ secrets.DOCKER_HUB_USERNAME }}/docker-shell:${{ steps.getTag.outputs.tag }}`.
+            See [CHANGELOG](${{ github.server_url }}/${{ github.repository }}/blob/v${{ steps.getTag.outputs.tag }}/CHANGELOG.md) for more details.
           files: |
             docker-shell.sh

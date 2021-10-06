@@ -1,10 +1,10 @@
-name: Master
+name: master deploy
 on:
   push:
     branches: [ master ]
 
 jobs:
-  deploy-dev:
+  master-deploy:
     runs-on: ubuntu-latest
     steps:
 
