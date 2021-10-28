@@ -4,8 +4,11 @@ FROM debian:bullseye-slim
 ENTRYPOINT ["/config/docker-entrypoint.sh"]
 ENV ZDOTDIR="/config"
 
-COPY ["config", "/config"]
+ARG NIX_VERSION=2.3.15
 RUN \
---mount=type=bind,source="setup.sh",target="/setup.sh" \
---mount=type=bind,from="docker:20.10.8-alpine3.14",source="/usr/local/bin/docker",target="/additional-bin/docker" \
-["/setup.sh"]
+--mount=type="cache",target="/var/lib/apt/lists" \
+--mount=type="cache",target="/nix-tmp" \
+--mount=type="bind",target="install_nix.sh",target="/install_nix.sh" \
+["/install_nix.sh"]
+
+COPY ["config", "/config"]
