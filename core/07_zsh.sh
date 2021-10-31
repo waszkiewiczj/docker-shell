@@ -3,7 +3,7 @@ set -e
 
 apt-get install --yes zsh=5.8-6+b2
 
-OH_MY_ZSH_INSTALL="/install-oh-my-zsh.sh"
+OH_MY_ZSH_INSTALL="/tmp/install-oh-my-zsh.sh"
 
 curl \
 --fail \
@@ -15,8 +15,6 @@ curl \
 
 chmod +x "${OH_MY_ZSH_INSTALL}"
 sh "${OH_MY_ZSH_INSTALL}"
-
-rm "${OH_MY_ZSH_INSTALL}"
 
 git clone \
 --depth=1 "https://github.com/romkatv/powerlevel10k.git" \
