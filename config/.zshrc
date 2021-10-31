@@ -18,3 +18,6 @@ export VIMINIT="source /config/.vimrc"
 # clipboard
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
+
+# disable gitstatusd - must be at the end of file
+POWERLEVEL9K_DISABLE_GITSTATUS=true

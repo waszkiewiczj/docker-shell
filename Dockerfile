@@ -11,5 +11,4 @@ ZSH_CUSTOM="/config/zsh-custom"
 COPY ["config", "/config"]
 
 RUN --mount=type="bind",source="core",target="/core" \
---mount=type="bind",source="/var/run/docker.sock",target="/var/run/docker.sock" \
 set -e && for script in $(find /core -type f -name *.sh | sort); do $script; done
