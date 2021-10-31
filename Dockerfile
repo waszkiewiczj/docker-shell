@@ -1,14 +1,15 @@
 # syntax=docker/dockerfile:1.3
-FROM debian:bullseye-slim
+FROM debian:bullseye-slim as base
 
 ENTRYPOINT ["/config/docker-entrypoint.sh"]
-ENV ZDOTDIR="/config"
 
-ARG NIX_VERSION=2.3.15
-RUN \
---mount=type="cache",target="/var/lib/apt/lists" \
---mount=type="cache",target="/nix-tmp" \
---mount=type="bind",target="install_nix.sh",target="/install_nix.sh" \
-["/install_nix.sh"]
+ENV TERM=xterm-256color \
+ZDOTDIR="/config" \
+ZSH="/config/oh-my-zsh" \
+ZSH_CUSTOM="/config/zsh-custom"
 
 COPY ["config", "/config"]
+
+RUN --mount=type="bind",source="core",target="/core" \
+--mount=type="bind",source="/var/run/docker.sock",target="/var/run/docker.sock" \
+set -e && for script in $(find /core -type f -name *.sh | sort); do $script; done
