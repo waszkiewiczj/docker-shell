@@ -1,3 +1,30 @@
+# kubernetes
+alias kubectl='docker run \
+--rm \
+--volume ${HOME}/.kube/config:/root/.kube/config \
+--volume ${HOME}:${HOME} \
+--workdir ${PWD} \
+nixery.dev/kubectl \
+kubectl'
+
+alias k9s='docker run \
+--rm \
+--tty \
+--interactive \
+--net host \
+--volume ${HOME}/.kube/config:/root/.kube/config \
+nixery.dev/k9s \
+k9s'
+
+alias kubeval='docker run \
+--rm \
+--interactive \
+--volume ${HOME}:${HOME} \
+--workdir ${PWD} \
+nixery.dev/kubeval \
+kubeval'
+
+
 # htop
 alias htop='docker run \
 --rm \
