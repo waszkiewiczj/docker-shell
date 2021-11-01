@@ -4,7 +4,8 @@ alias htop='docker run \
 --tty \
 --interactive \
 --pid host \
-nixery.dev/htop htop'
+nixery.dev/htop 
+htop'
 
 
 # net tools
@@ -13,7 +14,14 @@ alias iftop='docker run \
 --tty \
 --interactive \
 --net host \
-nixery.dev/iftop iftop'
+nixery.dev/iftop 
+iftop'
+
+alias ip='docker run \
+--rm \
+--net host
+nixery.dev/iproute2 
+ip'
 
 
 # vim
