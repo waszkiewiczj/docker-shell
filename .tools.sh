@@ -82,6 +82,7 @@ alias vim='docker run \
 --volume /config/.vimrc:/config/.vimrc \
 --volume ${HOME}:${HOME} \
 --workdir ${PWD} \
+--user $(id --user):$(id --group) \
 nixery.dev/vim/vimplugins.onedark-vim \
 vim --cmd "set runtimepath+=/"'
 
@@ -91,7 +92,7 @@ alias bat='docker run \
 --rm \
 --tty \
 --interactive \
---volume ${HOME}:${HOME} \
+--volume ${HOME}:${HOME}:ro \
 --workdir ${PWD} \
 nixery.dev/bat \
 bat'
