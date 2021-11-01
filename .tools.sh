@@ -35,7 +35,7 @@ nixery.dev/kubeval \
 kubeval'
 
 
-# htop
+# proc
 alias htop='docker run \
 --rm \
 --tty \
@@ -43,6 +43,13 @@ alias htop='docker run \
 --pid host \
 nixery.dev/htop 
 htop'
+
+alias ps='docker run \
+--rm \
+--pid host \
+--volume /etc/passwd:/etc/passwd:ro \
+nixery.dev/ps \
+ps'
 
 
 # net tools
