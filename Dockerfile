@@ -16,6 +16,8 @@ set -e && for script in $(find /core -type f -name *.sh | sort); do $script; don
 
 FROM base as slim
 
+COPY --from="docker:20.10.8-alpine3.14" ["/usr/local/bin/docker", "/usr/bin/docker"]
+
 COPY [".tools.sh", "/config/.tools.sh"]
 
 

@@ -21,3 +21,6 @@ alias pbpaste='xclip -selection clipboard -o'
 
 # slim tools
 [[ ! -f "/config/.tools.sh" ]] || source "/config/.tools.sh"
+
+# fzf config
+alias fzf="fzf --preview='bat --style numbers,changes --color always {}'"

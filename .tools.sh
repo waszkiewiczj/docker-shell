@@ -44,6 +44,7 @@ alias vim='docker run \
 --env VIMINIT \
 --volume /config/.vimrc:/config/.vimrc \
 --volume ${HOME}:${HOME} \
+--workdir ${PWD} \
 nixery.dev/vim/vimplugins.onedark-vim \
 vim --cmd "set runtimepath+=/"'
 
@@ -54,5 +55,17 @@ alias bat='docker run \
 --tty \
 --interactive \
 --volume ${HOME}:${HOME} \
+--workdir ${PWD} \
 nixery.dev/bat \
 bat'
+
+
+# fzf
+alias fzf='docker run \
+--rm \
+--tty \
+--interactive \
+--volume ${HOME}:${HOME}:ro \
+--workdir ${PWD} \
+nixery.dev/bat/fzf
+fzf'
