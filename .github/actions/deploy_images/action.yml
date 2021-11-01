@@ -1,0 +1,41 @@
+name: Deploy docker image
+
+inputs:
+  tag:
+    required: true
+    type: string
+  registry:
+    required: false
+    type: string
+    default: ghcr.io
+  image_name:
+    required: false
+    type: string
+    default: ${{ github.repository }}
+
+runs:
+  using: "composite"
+  steps:
+    
+    - name: Login to registry
+      uses: docker/login-action@v1
+      with:
+        registry: ${{ inputs.registry }}
+        username: ${{ github.actor }}
+        password: ${{ github.token }}
+
+    - name: Deploy slim version
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        target: slim
+        tags: ${{ inputs.registry }}/${{ inputs.image_name }}:${{ inputs.tag }}-slim
+        
+    - name: Deploy normal version
+      uses: docker/build-push-action@v2
+      with: 
+        context: .
+        push: true
+        cache-from: ${{ inputs.registry }}/${{ inputs.image_name }}:${{ inputs.tag }}-slim
+        tags: ${{ inputs.registry }}/${{ inputs.image_name }}:${{ inputs.tag }}
