@@ -23,6 +23,18 @@ alias ip='docker run \
 nixery.dev/iproute2 
 ip'
 
+alias ifconfig='docker run \
+--rm \
+--net host \
+nixery.dev/unixtools.ifconfig \
+ifconfig'
+
+alias netstat='docker run \
+--rm \
+--net host \
+nixery.dev/unixtools.netstat \
+netstat'
+
 
 # vim
 alias vim='docker run \
