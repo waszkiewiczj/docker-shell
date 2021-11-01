@@ -18,6 +18,7 @@ curl \
 --silent \
 --show-error \
 --location \
+--create-dirs \
 "https://webinstall.dev/k9s" | bash
 
 mv "/root/.local/bin/k9s" "/usr/bin/"

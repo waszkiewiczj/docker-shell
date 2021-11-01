@@ -1,3 +1,13 @@
+# docker
+alias hadolint='docker run \
+--rm \
+--interactive \
+--volume ${HOME}:${HOME} \
+--workdir ${PWD} \
+nixery.dev/hadolint \
+hadolint'
+
+
 # kubernetes
 alias kubectl='docker run \
 --rm \
