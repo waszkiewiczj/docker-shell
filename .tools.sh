@@ -115,3 +115,14 @@ alias figlet='docker run \
 --interactive \
 nixery.dev/figlet \
 figlet'
+
+
+# git
+alias tig='docker run \
+--rm \
+--tty \
+--interactive \
+--volume ${HOME}:${HOME}:ro \
+--workdir ${PWD} \
+nixery.dev/tig \
+tig'
