@@ -106,3 +106,11 @@ alias fzf='docker run \
 --workdir ${PWD} \
 nixery.dev/bat/fzf
 fzf'
+
+
+# figlet
+alias figlet='docker run \
+--rm \
+--interactive \
+nixery.dev/figlet \
+figlet'
