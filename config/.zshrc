@@ -7,7 +7,7 @@ export HISTSIZE=10000
 export SAVEHIST=10000
 
 # Oh My Zsh
-plugins=(git docker docker-compose)
+plugins=(git docker docker-compose command-not-found)
 ZSH_THEME="powerlevel10k/powerlevel10k"
 source "${ZSH}/oh-my-zsh.sh"
 [[ ! -f "/config/.p10k.zsh" ]] || source "/config/.p10k.zsh"
@@ -19,5 +19,5 @@ export VIMINIT="source /config/.vimrc"
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 
-# disable gitstatusd - must be at the end of file
-POWERLEVEL9K_DISABLE_GITSTATUS=true
+# slim tools
+[[ ! -f "/config/.tools.sh" ]] || source "/config/.tools.sh"
