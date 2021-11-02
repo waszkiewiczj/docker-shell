@@ -15,4 +15,4 @@ jobs:
     - name: Deploy dev images
       uses: ./.github/actions/deploy_images
       with:
-        tag: dev-latest
+        tags: dev-latest,test

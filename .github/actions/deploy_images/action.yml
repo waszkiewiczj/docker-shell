@@ -1,7 +1,7 @@
-name: Deploy docker image
+name: Deploy docker images
 
 inputs:
-  tag:
+  tags:
     required: true
     type: string
   registry:
@@ -24,18 +24,33 @@ runs:
         username: ${{ github.actor }}
         password: ${{ github.token }}
 
+    - name: Extract slim tags
+      uses: frabert/replace-string-action@v2.0
+      with:
+        pattern: '([\w\d.-]+)(,?)'
+        string: '${{ inputs.tag }}'
+        replace-with: '${{ inputs.registry }}/${{ inputs.image_name }}:$1-slim$2'
+      id: slimTags
+
+    - name: Extract normal tags
+      uses: frabert/replace-string-action@v2.0
+      with:
+        pattern: '([\w\d.-]+,?)'
+        string: '${{ inputs.tag }}'
+        replace-with: '${{ inputs.registry }}/${{ inputs.image_name }}:$1'
+      id: normalTags
+
     - name: Deploy slim version
       uses: docker/build-push-action@v2
       with:
         context: .
         push: true
         target: slim
-        tags: ${{ inputs.registry }}/${{ inputs.image_name }}:${{ inputs.tag }}-slim
+        tags: ${{ steps.slimTags.outputs.replaced }}
         
     - name: Deploy normal version
       uses: docker/build-push-action@v2
       with: 
         context: .
         push: true
-        cache-from: ${{ inputs.registry }}/${{ inputs.image_name }}:${{ inputs.tag }}-slim
-        tags: ${{ inputs.registry }}/${{ inputs.image_name }}:${{ inputs.tag }}
+        tags: ${{ steps.normalTags.outputs.replaced }}
