@@ -27,17 +27,19 @@ runs:
     - name: Extract slim tags
       uses: frabert/replace-string-action@v2.0
       with:
-        pattern: '([\w\d.-]+)(,?)'
+        pattern: '([\w\d.-]+)'
         string: '${{ inputs.tags }}'
-        replace-with: '${{ inputs.registry }}/${{ inputs.image_name }}:$1-slim$2'
+        replace-with: '${{ inputs.registry }}/${{ inputs.image_name }}:$1-slim'
+        flags: 'g'
       id: slimTags
 
     - name: Extract normal tags
       uses: frabert/replace-string-action@v2.0
       with:
-        pattern: '([\w\d.-]+,?)'
+        pattern: '([\w\d.-]+)'
         string: '${{ inputs.tags }}'
         replace-with: '${{ inputs.registry }}/${{ inputs.image_name }}:$1'
+        flags: 'g'
       id: normalTags
 
     - name: Deploy slim version
