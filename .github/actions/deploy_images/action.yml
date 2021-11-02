@@ -12,11 +12,12 @@ inputs:
     required: false
     type: string
     default: ${{ github.repository }}
-  outputs:
-    slim-images:
-      value: ${{ steps.slimTags.outputs.replaced }}
-    normal-images:
-      value: ${{ steps.normalTags.outputs.replaced }}
+    
+outputs:
+  slim-images:
+    value: ${{ steps.slimTags.outputs.replaced }}
+  normal-images:
+    value: ${{ steps.normalTags.outputs.replaced }}
 
 runs:
   using: "composite"
