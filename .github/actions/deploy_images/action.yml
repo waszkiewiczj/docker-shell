@@ -28,7 +28,7 @@ runs:
       uses: frabert/replace-string-action@v2.0
       with:
         pattern: '([\w\d.-]+)(,?)'
-        string: '${{ inputs.tag }}'
+        string: '${{ inputs.tags }}'
         replace-with: '${{ inputs.registry }}/${{ inputs.image_name }}:$1-slim$2'
       id: slimTags
 
@@ -36,7 +36,7 @@ runs:
       uses: frabert/replace-string-action@v2.0
       with:
         pattern: '([\w\d.-]+,?)'
-        string: '${{ inputs.tag }}'
+        string: '${{ inputs.tags }}'
         replace-with: '${{ inputs.registry }}/${{ inputs.image_name }}:$1'
       id: normalTags
 
