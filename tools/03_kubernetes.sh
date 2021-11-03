@@ -19,9 +19,10 @@ curl \
 --show-error \
 --location \
 --create-dirs \
-"https://webinstall.dev/k9s" | bash
+--output "/tmp/k9s.tar.gz" \
+"https://github.com/derailed/k9s/releases/download/v0.24.15/k9s_Linux_x86_64.tar.gz"
 
-mv "/root/.local/bin/k9s" "/usr/bin/"
+tar --extract --directory "/usr/bin" --file "/tmp/k9s.tar.gz"
 
 
 curl \
