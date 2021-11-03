@@ -79,6 +79,12 @@ alias netstat='docker run \
 nixery.dev/unixtools.netstat \
 netstat'
 
+alias host='docker run \
+--rm \
+--net host \
+nixery.dev/host \
+host'
+
 
 # vim
 alias vim='docker run \
