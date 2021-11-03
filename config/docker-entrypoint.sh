@@ -25,7 +25,7 @@ if [[ -n "${HOST_HOME_DIR}" ]]; then
             ${HOST_USER}
 
         if [[ !  $(cat /etc/group | grep --quiet docker) ]]; then
-            usermod --groups docker ${HOST_USER}
+            usermod --append --groups docker ${HOST_USER}
         fi
 
         # change ower of all configs to host-like user
