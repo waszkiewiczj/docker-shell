@@ -24,7 +24,7 @@ if [[ -n "${HOST_HOME_DIR}" ]]; then
             --groups sudo \
             ${HOST_USER}
 
-        if [[ $(cat /etc/group | grep --quiet docker) ]]; then
+        if [[ !  $(cat /etc/group | grep --quiet docker) ]]; then
             usermod --groups docker ${HOST_USER}
         fi
 
