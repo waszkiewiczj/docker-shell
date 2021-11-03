@@ -3,7 +3,8 @@ FROM debian:bullseye-slim as base
 
 ENTRYPOINT ["/config/docker-entrypoint.sh"]
 
-ENV TERM=xterm-256color \
+ENV DOCKER_BUILDKIT=1 \
+TERM=xterm-256color \
 ZDOTDIR="/config" \
 ZSH="/config/oh-my-zsh" \
 ZSH_CUSTOM="/config/zsh-custom"
