@@ -22,7 +22,7 @@ COPY --from="docker:20.10.8-alpine3.14" ["/usr/local/bin/docker", "/usr/bin/dock
 COPY [".tools.sh", "/config/.tools.sh"]
 
 
-FROM base
+FROM base as regular
 
 RUN --mount=type="bind",source="tools",target="/tools" \
 set -e && for script in $(find /tools -type f -name *.sh | sort); do $script; done
