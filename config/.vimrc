@@ -17,6 +17,9 @@ filetype plugin indent on
 " set 2-space indent for yaml files
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
+" set syntax for *.dockerfile
+autocmd BufNewFile,BufRead *.dockerfile set syntax=dockerfile
+
 " add line numbering
 set number
 set relativenumber
