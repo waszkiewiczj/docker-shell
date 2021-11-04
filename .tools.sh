@@ -1,3 +1,6 @@
+CONTAINER_ID="$(cat /proc/$$/cpuset | awk -F/ '{print substr($3,1,10)}')"
+
+
 # docker
 alias hadolint='docker run \
 --rm \
@@ -87,18 +90,19 @@ host'
 
 
 # vim
-alias vim='docker run \
---rm \
---tty \
---interactive \
---env VIMINIT \
---volume /config/.vimrc:/config/.vimrc \
---volume ${HOME}:${HOME} \
---workdir ${PWD} \
---user $(id --user):$(id --group) \
-nixery.dev/vim/vimplugins.onedark-vim \
-vim --cmd "set runtimepath+=/"'
-
+function vim() {
+	docker run \
+	--rm \
+	--tty \
+	--interactive \
+	--env VIMINIT \
+	--volumes-from ${CONTAINER_ID} \
+	--volume ${HOME}:${HOME} \
+	--workdir ${PWD} \
+	--user $(id --user):$(id --group) \
+	nixery.dev/shell/vim/vimplugins.onedark-vim \
+	sh -c "stty cols $COLUMNS rows $LINES && vim --cmd 'set runtimepath+=/' `echo $@`"
+}
 
 # bat
 alias bat='docker run \

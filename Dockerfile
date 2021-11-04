@@ -3,6 +3,8 @@ FROM debian:bullseye-slim as base
 
 ENTRYPOINT ["/config/docker-entrypoint.sh"]
 
+VOLUME /config
+
 ENV DOCKER_BUILDKIT=1 \
 TERM=xterm-256color \
 ZDOTDIR="/config" \
@@ -26,3 +28,4 @@ FROM base as regular
 
 RUN --mount=type="bind",source="tools",target="/tools" \
 set -e && for script in $(find /tools -type f -name *.sh | sort); do $script; done
+
