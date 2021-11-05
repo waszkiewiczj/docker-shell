@@ -24,3 +24,12 @@ alias pbpaste='xclip -selection clipboard -o'
 
 # fzf config
 alias fzf="fzf --preview='bat --style numbers,changes --color always {}'"
+
+# set up ssh agent
+eval $(ssh-agent -s) 1>/dev/null
+find ~/.ssh \
+-not -name "known_hosts" \
+-not -regex ".*/.pub$" \
+-type f \
+-perm 600 \
+-exec "ssh-add -q {}"
