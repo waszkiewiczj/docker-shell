@@ -3,7 +3,7 @@ name: release deploy
 on:
   push:
     tags:
-      - "v*"
+      - "[0-9].[0-9].[0-9]"
 
 jobs:
   release-deploy:
@@ -12,32 +12,33 @@ jobs:
 
       - name: Checkout repo
         uses: actions/checkout@v2
-      
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      - name: Get tag
-        uses: olegtarasov/get-tag@v2.1
+      - name: Get tag info
+        run: |
+          TAG=$(/usr/bin/git tag -l ${GITHUB_REF#refs/tags/})
+          SUBJECT=$(/usr/bin/git tag -l ${GITHUB_REF#refs/tags/} --format='%(subject)')
+          BODY=$(/usr/bin/git tag -l ${GITHUB_REF#refs/tags/} --format='%(body)')
+          echo "::set-output name=tag;;$TAG"
+          echo "::set-output name=subject::$SUBJECT"
+          echo "::set-output name=body::$BODY"
         id: getTag
-        with:
-          tagRegex: "v(.*)"
 
-      - name: Build and push
-        uses: docker/build-push-action@v2
+      - name: Deploy images
+        uses: ./.github/actions/deploy_images
         with:
-          context: ./
-          file: ./Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/docker-shell:${{ steps.getTag.outputs.tag }},${{ secrets.DOCKER_HUB_USERNAME }}/docker-shell:latest
+          tags: ${{ steps.getTag.outputs.tag }},latest
+
+      - name: Replace release tag in run script
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "latest"
+          replace: "${{ steps.getTag.outputs.tag }}"
+          include: run.sh
+          regex: false
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v1
         with:
-          body: |
-            Image available with tag `${{ secrets.DOCKER_HUB_USERNAME }}/docker-shell:${{ steps.getTag.outputs.tag }}`.
-            See [CHANGELOG](${{ github.server_url }}/${{ github.repository }}/blob/v${{ steps.getTag.outputs.tag }}/CHANGELOG.md) for more details.
+          body: ${{ steps.getTag.outputs.body }}
           files: |
-            docker-shell.sh
+            run.sh
