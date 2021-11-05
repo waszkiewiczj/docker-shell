@@ -1,13 +1,26 @@
 #!/bin/bash
 
+DOCKER_SHELL_RELEASE_VERSION="latest"
 DOCKER_SHELL_REGISTRY="ghcr.io/waszkiewiczj/docker-shell"
-DOCKER_SHELL_BASE_TAG="${DOCKER_SHELL_REGISTRY}:latest"
+DOCKER_SHELL_BASE_TAG="${DOCKER_SHELL_REGISTRY}:${DOCKER_SHELL_RELEASE_VERSION}"
 
 # parameters for local build
 DOCKER_SHELL_VERSION=""
 DOCKER_SHELL_TARGET="regular"
 DOCKER_SHELL_BUILD="false"
 DOCKER_SHELL_CONTEXT="$(dirname $0)"
+
+
+function usage() {
+	echo "Run shell inside docker container."
+	echo "Usage:"
+	echo "run.sh [--slim] [--local|--dev]"
+	echo ""
+	echo "Options"
+	echo "-d, --dev   - run development version"
+	echo "-l, --local - build & run local version"
+	echo "-s, --slim  - run slim version"
+}
 
 
 while test $# -gt 0; do
@@ -26,9 +39,14 @@ while test $# -gt 0; do
 			DOCKER_SHELL_BASE_TAG="docker-shell"
 			shift
 			;;
+		-h|--help)
+			usage
+			exit 0;
+			;;
 		*)
 			echo "$1 is not a recognized flag!"
-			return 1;
+			usage
+			exit 1;
 			;;
 	esac
 done
