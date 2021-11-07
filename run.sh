@@ -14,12 +14,13 @@ DOCKER_SHELL_CONTEXT="$(dirname $0)"
 function usage() {
 	echo "Run shell inside docker container."
 	echo "Usage:"
-	echo "run.sh [--slim] [--local|--dev]"
+	echo "run.sh [--slim] [--local|--dev|--tag]"
 	echo ""
 	echo "Options"
-	echo "-d, --dev   - run development version"
-	echo "-l, --local - build & run local version"
 	echo "-s, --slim  - run slim version"
+	echo "-l, --local - build & run local version"
+	echo "-d, --dev   - run development version"
+	echo "-t, --tag   - run specific version"
 }
 
 
@@ -39,6 +40,9 @@ while test $# -gt 0; do
 			DOCKER_SHELL_BASE_TAG="docker-shell"
 			shift
 			;;
+		-t|--tag)
+			DOCKER_SHELL_BASE_TAG="${DOCKER_SHELL_REGISTRY}:$2"
+			shift 2
 		-h|--help)
 			usage
 			exit 0;
