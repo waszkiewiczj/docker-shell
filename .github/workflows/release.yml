@@ -18,7 +18,7 @@ jobs:
           TAG=$(/usr/bin/git tag -l ${GITHUB_REF#refs/tags/})
           SUBJECT=$(/usr/bin/git tag -l ${GITHUB_REF#refs/tags/} --format='%(subject)')
           BODY=$(/usr/bin/git tag -l ${GITHUB_REF#refs/tags/} --format='%(body)')
-          echo "::set-output name=tag;;$TAG"
+          echo "::set-output name=tag::$TAG"
           echo "::set-output name=subject::$SUBJECT"
           echo "::set-output name=body::$BODY"
         id: getTag
