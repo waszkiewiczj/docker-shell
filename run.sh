@@ -43,6 +43,7 @@ while test $# -gt 0; do
 		-t|--tag)
 			DOCKER_SHELL_BASE_TAG="${DOCKER_SHELL_REGISTRY}:$2"
 			shift 2
+			;;
 		-h|--help)
 			usage
 			exit 0;
