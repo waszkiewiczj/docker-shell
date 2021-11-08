@@ -105,14 +105,16 @@ function vim() {
 }
 
 # bat
-alias bat='docker run \
---rm \
---tty \
---interactive \
---volume ${HOME}:${HOME}:ro \
---workdir ${PWD} \
-nixery.dev/bat \
-bat'
+function bat() {
+	docker run \
+	--rm \
+	--tty \
+	--interactive \
+	--volume ${HOME}:${HOME}:ro \
+	--workdir ${PWD} \
+	nixery.dev/shell/bat \
+	sh -c "stty cols $COLUMNS rows $LINES && bat `echo $@`"
+}
 
 
 # fzf
