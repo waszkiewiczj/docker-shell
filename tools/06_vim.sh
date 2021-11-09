@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-apt-get install --yes vim=2:8.2.2434-3
+apt-get install --yes vim-gtk=2:8.2.2434-3
 
 for file in "colors/onedark.vim" "autoload/onedark.vim" 
 do
