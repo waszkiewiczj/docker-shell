@@ -4,7 +4,12 @@ set -e
 # create docker group
 if [[ -S "/var/run/docker.sock" ]]; then
     HOST_DOCKER_GID="$(stat --format '%g' /var/run/docker.sock)"
-    groupadd --gid "${HOST_DOCKER_GID}" docker
+
+    if [[ "${HOST_DOCKER_GID}" != "0" ]]; then
+        groupadd --gid "${HOST_DOCKER_GID}" docker
+    else
+        echo "WARNING: docker group ID cannot be 0, no group created"
+    fi
 else
     echo "WARNING: No docker socket mounted!"
 fi
