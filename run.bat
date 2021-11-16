@@ -8,7 +8,7 @@ SET DOCKER_SHELL_BASE_TAG=%DOCKER_SHELL_REGISTRY%:%DOCKER_SHELL_RELEASE_VERSION%
 SET DOCKER_SHELL_VERSION=
 SET DOCKER_SHELL_TARGET=regular
 SET DOCKER_SHELL_BUILD=false
-SET DOCKER_SHELL_CONTEXT=%0\..
+SET DOCKER_SHELL_CONTEXT=%~dp0
 
 :processargs
 SET ARG=%1
@@ -25,7 +25,7 @@ IF DEFINED ARG (
         SHIFT
         SET DOCKER_SHELL_BASE_TAG=%DOCKER_SHELL_REGISTRY%:%2
         SHIFT
-    ) ELSE IF "%ARG%" == "/h" (
+    ) ELSE IF "%ARG%" == "/?" (
         CALL :usage
         EXIT /B 0
     ) ELSE  (
@@ -51,6 +51,7 @@ docker run ^
 --privileged ^
 --net host ^
 --pid host ^
+--volume %USERPROFILE%:/home/%USERNAME% ^
 --volume /var/run/docker.sock:/var/run/docker.sock ^
 --env DISPLAY ^
 %DOCKER_SHELL_TAG%
@@ -59,5 +60,12 @@ EXIT /B 0
 
 
 :usage
-ECHO "This is usage"
+ECHO Run shell inside docker container.
+ECHO Usage:
+ECHO run.bat [/s] [{/l ^| /d ^| /t ^<tag^>}]
+ECHO Options:
+ECHO /s - run slim version
+ECHO /l - build ^& run local version
+ECHO /d - run development version
+ECHO /t - run specific version
 EXIT /B 0
