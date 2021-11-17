@@ -48,6 +48,7 @@ IF "%DOCKER_SHELL_BUILD%" == "true" (
 docker run ^
 --rm ^
 --interactive ^
+--tty ^
 --privileged ^
 --net host ^
 --pid host ^
