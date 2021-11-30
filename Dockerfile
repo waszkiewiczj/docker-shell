@@ -3,6 +3,8 @@ FROM debian:bullseye-slim as base
 
 ENTRYPOINT ["/config/docker-entrypoint.sh"]
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 VOLUME /config
 
 ENV DOCKER_BUILDKIT=1 \
