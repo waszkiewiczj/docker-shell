@@ -3,7 +3,7 @@ FROM debian:bullseye-slim as base
 
 ENTRYPOINT ["/config/docker-entrypoint.sh"]
 
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+SHELL ["/bin/bash", "-e", "-o", "pipefail", "-c"]
 
 VOLUME /config
 
@@ -16,7 +16,7 @@ ZSH_CUSTOM="/config/zsh-custom"
 COPY ["config", "/config"]
 
 RUN --mount=type=bind,source=core,target=/core \
-set -e && for script in $(find /core -type f -name *.sh | sort); do $script; done
+for script in $(find /core -type f -name *.sh | sort); do $script; done
 
 
 FROM base as slim
@@ -29,4 +29,4 @@ COPY [".tools.sh", "/config/.tools.sh"]
 FROM base as regular
 
 RUN --mount=type=bind,source=tools,target=/tools \
-set -e && for script in $(find /tools -type f -name *.sh | sort); do $script; done
+for script in $(find /tools -type f -name *.sh | sort); do $script; done
