@@ -17,6 +17,11 @@ jobs:
         with:
           dockerfile: Dockerfile
           format: tty
+
+      - name: Validate shell scripts
+        uses: ludeeus/action-shellcheck@1.1.0
+        with:
+          format: tty
         
       - name: Build container
         id: docker_build
