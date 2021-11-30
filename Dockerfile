@@ -13,7 +13,7 @@ ZSH_CUSTOM="/config/zsh-custom"
 
 COPY ["config", "/config"]
 
-RUN --mount=type="bind",source="core",target="/core" \
+RUN --mount=type=bind,source=core,target=/core \
 set -e && for script in $(find /core -type f -name *.sh | sort); do $script; done
 
 
@@ -26,6 +26,5 @@ COPY [".tools.sh", "/config/.tools.sh"]
 
 FROM base as regular
 
-RUN --mount=type="bind",source="tools",target="/tools" \
+RUN --mount=type=bind,source=tools,target=/tools \
 set -e && for script in $(find /tools -type f -name *.sh | sort); do $script; done
-
