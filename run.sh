@@ -60,18 +60,18 @@ DOCKER_SHELL_TAG="${DOCKER_SHELL_BASE_TAG}${DOCKER_SHELL_VERSION}"
 
 
 if [[ "${DOCKER_SHELL_BUILD}" == "true" ]]; then
-	if [[ ! -f "$0" ]] || [[ ! -f "$(dirname $0)/Dockerfile" ]]; then
+	if [[ ! -f "$0" ]] || [[ ! -f "$(dirname "$0")/Dockerfile" ]]; then
 		echo "ERROR: You need to clone whole repository to build local version"
 		exit 1
 	fi
-	DOCKER_SHELL_CONTEXT="$(dirname $0)"
+	DOCKER_SHELL_CONTEXT="$(dirname "$0")"
 
 	DOCKER_BUILDKIT=1 \
 	docker build \
 	--progress plain \
-	--target ${DOCKER_SHELL_TARGET} \
-	--tag ${DOCKER_SHELL_TAG} \
-	${DOCKER_SHELL_CONTEXT}
+	--target "${DOCKER_SHELL_TARGET}" \
+	--tag "${DOCKER_SHELL_TAG}" \
+	"${DOCKER_SHELL_CONTEXT}"
 fi
 
 
