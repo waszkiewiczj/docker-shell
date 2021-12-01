@@ -23,8 +23,9 @@ This is the most beautiful fact - you don't need to install it!
 
 To run it, simply download script:
 
+| Platform    | URL                                                                           |
+|:------------|:------------------------------------------------------------------------------|
 | Linux/MacOs | https://github.com/waszkiewiczj/docker-shell/releases/latest/download/run.sh  |
-|-------------|-------------------------------------------------------------------------------|
 | Windows     | https://github.com/waszkiewiczj/docker-shell/releases/latest/download/run.bat |
 
 
