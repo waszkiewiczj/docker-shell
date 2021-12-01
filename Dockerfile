@@ -16,7 +16,7 @@ ZSH_CUSTOM="/config/zsh-custom"
 COPY ["config", "/config"]
 
 RUN --mount=type=bind,source=core,target=/core \
-for script in $(find /core -type f -name *.sh | sort); do $script; done
+for script in $(find /core -type f -name "*.sh" | sort); do $script; done
 
 
 FROM base as slim
@@ -31,4 +31,4 @@ FROM base as regular
 SHELL ["/bin/bash", "-e", "-o", "pipefail", "-c"]
 
 RUN --mount=type=bind,source=tools,target=/tools \
-for script in $(find /tools -type f -name *.sh | sort); do $script; done
+for script in $(find /tools -type f -name "*.sh" | sort); do $script; done
