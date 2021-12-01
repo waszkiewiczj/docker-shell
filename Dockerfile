@@ -23,7 +23,7 @@ FROM base as slim
 
 COPY --from="docker:20.10.8-alpine3.14" ["/usr/local/bin/docker", "/usr/bin/docker"]
 
-COPY [".tools.sh", "/config/.tools.sh"]
+COPY [".toolsrc", "/config/"]
 
 
 FROM base as regular

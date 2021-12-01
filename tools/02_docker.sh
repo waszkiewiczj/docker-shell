@@ -1,4 +1,4 @@
-#!bin/sh
+#!/bin/sh
 set -e
 
 apt-get install --yes \
