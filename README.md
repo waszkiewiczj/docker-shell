@@ -21,12 +21,16 @@ In this way I achieved a functionall shell environment that is extremely easy to
 
 This is the most beautiful fact - you don't need to install it!
 
-This solution requires only Docker engine running on host machine and Linux-based operating system.
+To run it, simply download script:
 
-To run it, simply download and execute start script by running:
-```bash
-bash -c "$(curl -fsSL https://github.com/waszkiewiczj/docker-shell/releases/latest/download/run.sh)" 
-```
+| Linux/MacOs | https://github.com/waszkiewiczj/docker-shell/releases/latest/download/run.sh  |
+|-------------|-------------------------------------------------------------------------------|
+| Windows     | https://github.com/waszkiewiczj/docker-shell/releases/latest/download/run.bat |
+
+
+This solution requires only Docker engine running on host machine with Linux-based containers.
+However, you need to be aware that there are some limitations on Windows and MacOS platforms, where containers are not ran on host system - thanks to that some utils (for instance `htop`) will not behave the same way as natively installed.
+
 
 ## Included tools
 
@@ -46,7 +50,7 @@ Image comes also in *slim* version, which has almost the same functionality as r
 ## Compatibility
 
 This is my private and made only out of passion project. That's why it can be not compatible with every environment possible. 
-It is also made with purpose of working on Linux systems to use all the abilities of Docker engine ran bare-metal and not with Docker Desktop, so suport for MacOS/Windows is very unlikely to happen.
+
 I personally use it daily on Ubuntu operating system and this is the platform that I am mostly focused on.
 
 

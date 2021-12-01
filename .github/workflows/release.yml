@@ -33,7 +33,7 @@ jobs:
         with:
           find: "latest"
           replace: "${{ steps.getTag.outputs.tag }}"
-          include: run.sh
+          include: run.*
           regex: false
 
       - name: Create GitHub release
@@ -42,3 +42,4 @@ jobs:
           body: ${{ steps.getTag.outputs.body }}
           files: |
             run.sh
+            run.bat

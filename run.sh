@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 DOCKER_SHELL_RELEASE_VERSION="latest"
 DOCKER_SHELL_REGISTRY="ghcr.io/waszkiewiczj/docker-shell"
@@ -13,9 +14,9 @@ DOCKER_SHELL_BUILD="false"
 function usage() {
 	echo "Run shell inside docker container."
 	echo "Usage:"
-	echo "run.sh [--slim] [--local|--dev|--tag]"
+	echo "run.sh [--slim] [--local|--dev|--tag <tag>]"
 	echo ""
-	echo "Options"
+	echo "Options:"
 	echo "-s, --slim  - run slim version"
 	echo "-l, --local - build & run local version"
 	echo "-d, --dev   - run development version"
