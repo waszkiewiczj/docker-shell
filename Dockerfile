@@ -28,5 +28,7 @@ COPY [".tools.sh", "/config/.tools.sh"]
 
 FROM base as regular
 
+SHELL ["/bin/bash", "-e", "-o", "pipefail", "-c"]
+
 RUN --mount=type=bind,source=tools,target=/tools \
 for script in $(find /tools -type f -name *.sh | sort); do $script; done
