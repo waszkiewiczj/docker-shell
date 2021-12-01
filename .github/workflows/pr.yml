@@ -22,6 +22,7 @@ jobs:
         uses: ludeeus/action-shellcheck@1.1.0
         with:
           format: tty
+          ignore_names: .p10k.zsh .toolsrc .zshrc .vimrc
         
       - name: Build container
         id: docker_build
