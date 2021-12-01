@@ -19,10 +19,10 @@ jobs:
           format: tty
 
       - name: Validate shell scripts
-        uses: ludeeus/action-shellcheck@1.1.0
+        uses: reviewdog/action-shellcheck@v1
         with:
-          format: tty
-          ignore_names: config/.p10k.zsh config/.zshrc config/.vimrc .toolsrc
+          exclude: |
+            config/.p10k.zsh
         
       - name: Build container
         id: docker_build
