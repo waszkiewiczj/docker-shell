@@ -5,7 +5,7 @@ on:
     branches: [ master ]
 
 jobs:
-  check:
+  run_checks:
     runs-on: ubuntu-latest
     steps:
 
