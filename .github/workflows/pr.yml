@@ -16,6 +16,7 @@ jobs:
         uses: reviewdog/action-hadolint@v1
         with:
           hadolint_ignore: DL3002 DL3022
+          fail_on_error: true
 
 
       - name: Validate shell scripts
