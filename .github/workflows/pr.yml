@@ -23,6 +23,7 @@ jobs:
         with:
           exclude: |
             config/.p10k.zsh
+          fail_on_error: true
         
       - name: Build container
         id: docker_build
