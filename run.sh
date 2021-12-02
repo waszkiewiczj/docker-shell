@@ -83,7 +83,7 @@ docker run \
 --privileged \
 --net host \
 --pid host \
---volume "${HOME}:${HOME}" \
+--volume "/:/mnt/host" \
 --volume "/var/run/docker.sock:/var/run/docker.sock" \
 --env DISPLAY \
 "${DOCKER_SHELL_TAG}"

@@ -15,13 +15,16 @@ else
 fi
 
 # create host-like user
-HOST_HOME_DIR="$(find /home -mindepth 1 -maxdepth 1 -type d | head --lines 1)"
+MOUNT_HOST_HOME_DIR="$(find /mnt/host/home -mindepth 1 -maxdepth 1 -type d | head --lines 1)"
 
-if [[ -n "${HOST_HOME_DIR}" ]]; then
-    HOST_USER="$(echo "${HOST_HOME_DIR}" | cut --delimiter '/' --fields 3)"
-    HOST_UID="$(stat --format '%u' "${HOST_HOME_DIR}")"
+if [[ -n "${MOUNT_HOST_HOME_DIR}" ]]; then
+    HOST_USER="$(echo "${MOUNT_HOST_HOME_DIR}" | cut --delimiter '/' --fields 5)"
+    HOST_UID="$(stat --format '%u' "${MOUNT_HOST_HOME_DIR}")"
 
     if [[ "${HOST_UID}" != "0" ]]; then
+        HOST_HOME_DIR="/home/${HOST_USER}"
+        ln --symbolic "${MOUNT_HOST_HOME_DIR}" "${HOST_HOME_DIR}"
+        
         useradd \
             --uid "${HOST_UID}" \
             --home-dir "${HOST_HOME_DIR}" \

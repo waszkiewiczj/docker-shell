@@ -52,7 +52,8 @@ docker run ^
 --privileged ^
 --net host ^
 --pid host ^
---volume %USERPROFILE%:/home/%USERNAME% ^
+--env HOST_HOME_DIR=/mnt/host%HOMEPATH:\=/% ^
+--volume %HOMEDRIVE%\:/mnt/host ^
 --volume /var/run/docker.sock:/var/run/docker.sock ^
 --env DISPLAY ^
 %DOCKER_SHELL_TAG%
