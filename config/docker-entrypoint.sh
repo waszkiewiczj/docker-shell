@@ -32,7 +32,7 @@ if [[ -n "${MOUNT_HOST_HOME_DIR}" ]]; then
             --groups sudo \
             "${HOST_USER}"
 
-        if ! grep --quiet docker /etc/group; then
+        if grep --quiet docker /etc/group; then
             usermod --append --groups docker "${HOST_USER}"
         fi
 
