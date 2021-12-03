@@ -43,6 +43,8 @@ IF "%DOCKER_SHELL_BUILD%" == "true" (
     --target %DOCKER_SHELL_TARGET% ^
     --tag %DOCKER_SHELL_TAG% ^
     %DOCKER_SHELL_CONTEXT%
+) ELSE (
+    docker pull %DOCKER_SHELL_TAG%
 )
 
 docker run ^
