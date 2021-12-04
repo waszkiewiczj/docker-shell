@@ -74,7 +74,7 @@ if [[ "${DOCKER_SHELL_BUILD}" == "true" ]]; then
 	--tag "${DOCKER_SHELL_TAG}" \
 	"${DOCKER_SHELL_CONTEXT}"
 else
-	docker pull "${DOCKER_SHELL_TAG}"
+	docker pull --quiet "${DOCKER_SHELL_TAG}" 1>/dev/null
 fi
 
 

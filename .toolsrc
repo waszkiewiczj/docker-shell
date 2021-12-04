@@ -2,12 +2,13 @@ CONTAINER_ID="$(cat /proc/$$/cpuset | awk -F/ '{print substr($3,1,10)}')"
 
 
 # docker
-alias hadolint='docker run \
+alias hadolint='
+docker run \
 --rm \
 --interactive \
 --volume ${HOME}:${HOME} \
 --workdir ${PWD} \
-nixery.dev/hadolint \
+$(docker pull --quiet nixery.dev/hadolint) \
 hadolint'
 
 
@@ -17,7 +18,7 @@ alias kubectl='docker run \
 --volume ${HOME}/.kube/config:/root/.kube/config \
 --volume ${HOME}:${HOME} \
 --workdir ${PWD} \
-nixery.dev/kubectl \
+$(docker pull --quiet nixery.dev/kubectl) \
 kubectl'
 
 alias k9s='docker run \
@@ -26,7 +27,7 @@ alias k9s='docker run \
 --interactive \
 --net host \
 --volume ${HOME}/.kube/config:/root/.kube/config \
-nixery.dev/k9s \
+$(docker pull --quiet nixery.dev/k9s) \
 k9s'
 
 alias kubeval='docker run \
@@ -34,7 +35,7 @@ alias kubeval='docker run \
 --interactive \
 --volume ${HOME}:${HOME} \
 --workdir ${PWD} \
-nixery.dev/kubeval \
+$(docker pull --quiet nixery.dev/kubeval) \
 kubeval'
 
 
@@ -44,14 +45,14 @@ alias htop='docker run \
 --tty \
 --interactive \
 --pid host \
-nixery.dev/htop 
+$(docker pull --quiet nixery.dev/htop) 
 htop'
 
 alias ps='docker run \
 --rm \
 --pid host \
 --volume /etc/passwd:/etc/passwd:ro \
-nixery.dev/ps \
+$(docker pull --quiet nixery.dev/ps) \
 ps'
 
 
@@ -61,31 +62,31 @@ alias iftop='docker run \
 --tty \
 --interactive \
 --net host \
-nixery.dev/iftop 
+$(docker pull --quiet nixery.dev/iftop) 
 iftop'
 
 alias ip='docker run \
 --rm \
 --net host
-nixery.dev/iproute2 
+$(docker pull --quiet nixery.dev/iproute2) 
 ip'
 
 alias ifconfig='docker run \
 --rm \
 --net host \
-nixery.dev/unixtools.ifconfig \
+$(docker pull --quiet nixery.dev/unixtools.ifconfig) \
 ifconfig'
 
 alias netstat='docker run \
 --rm \
 --net host \
-nixery.dev/unixtools.netstat \
+$(docker pull --quiet nixery.dev/unixtools.netstat) \
 netstat'
 
 alias host='docker run \
 --rm \
 --net host \
-nixery.dev/host \
+$(docker pull --quiet nixery.dev/host) \
 host'
 
 
@@ -100,7 +101,7 @@ function vim() {
 	--volume ${HOME}:${HOME} \
 	--workdir ${PWD} \
 	--user $(id --user):$(id --group) \
-	nixery.dev/shell/vim/vimplugins.onedark-vim \
+	$(docker pull --quiet nixery.dev/shell/vim/vimplugins.onedark-vim) \
 	sh -c "stty cols $COLUMNS rows $LINES && vim --cmd 'set runtimepath+=/' `echo $@`"
 }
 
@@ -112,7 +113,7 @@ function bat() {
 	--interactive \
 	--volume ${HOME}:${HOME}:ro \
 	--workdir ${PWD} \
-	nixery.dev/shell/bat \
+	$(docker pull --quiet nixery.dev/shell/bat) \
 	sh -c "stty cols $COLUMNS rows $LINES && bat `echo $@`"
 }
 
@@ -124,7 +125,7 @@ alias fzf='docker run \
 --interactive \
 --volume ${HOME}:${HOME}:ro \
 --workdir ${PWD} \
-nixery.dev/bat/fzf
+$(docker pull --quiet nixery.dev/bat/fzf)
 fzf'
 
 
@@ -132,7 +133,7 @@ fzf'
 alias figlet='docker run \
 --rm \
 --interactive \
-nixery.dev/figlet \
+$(docker pull --quiet nixery.dev/figlet) \
 figlet'
 
 
@@ -143,5 +144,5 @@ alias tig='docker run \
 --interactive \
 --volume ${HOME}:${HOME}:ro \
 --workdir ${PWD} \
-nixery.dev/tig \
+$(docker pull --quiet nixery.dev/tig) \
 tig'

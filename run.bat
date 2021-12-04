@@ -44,7 +44,7 @@ IF "%DOCKER_SHELL_BUILD%" == "true" (
     --tag %DOCKER_SHELL_TAG% ^
     %DOCKER_SHELL_CONTEXT%
 ) ELSE (
-    docker pull %DOCKER_SHELL_TAG%
+    docker pull --quiet %DOCKER_SHELL_TAG% 1>nul
 )
 
 docker run ^
